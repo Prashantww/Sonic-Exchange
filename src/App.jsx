@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import NavBar from "./components/Navbar";
 
-import Home from "./pages/Home";
+import Home from "./pages/Hero/Home";
 import Airdrop from "./pages/Airdrop";
 import Profile from "./pages/Profile";
 
