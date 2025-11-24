@@ -45,11 +45,19 @@
   .navContainer {
     justify-content: start;
     height: 60px;
+    padding: 0 20px;
+    backdrop-filter: unset;
+    border: none;
   }
 
   /* Hide only the actions/menu links */
   .actions {
     display: none;
+  }
+
+  .logo {
+    font-size: 20px;
+    font-weight: 500;
   }
 
   /* Show bottom nav */
