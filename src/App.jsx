@@ -1,6 +1,6 @@
 import React from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
-import NavBar from "./components/NavBar/Navbar";
+import NavBar from "./components/Navbar";
 
 import Home from "./pages/Home";
 import Airdrop from "./pages/Airdrop";
