@@ -354,7 +354,7 @@ const BuySection = () => {
 
       <div className={styles.sectionContent}>
         <div className={styles.inputGroup}>
-          <label className={styles.label}>USDT to Buy</label>
+          <label className={styles.label}>Amount to Pay (INR / USD)</label>
           <input
             type="text"
             className={styles.input}
@@ -363,12 +363,8 @@ const BuySection = () => {
         </div>
 
         <div className={styles.inputGroup}>
-          <label className={styles.label}>You Will Pay (INR / USD)</label>
-          <input
-            type="text"
-            className={styles.input}
-            placeholder="Amount to pay"
-          />
+          <label className={styles.label}>You Will Get (USDT)</label>
+          <input type="text" className={styles.input} placeholder="" />
         </div>
 
         <div className={styles.inputGroup}>
@@ -515,6 +511,16 @@ const BuySection = () => {
                 </div>
               </div>
             )}
+          </div>
+        </div>
+
+        <div className={styles.uploadSection}>
+          <button className={styles.uploadButton}>
+            <IoAddCircleOutline size={30} />
+          </button>
+          <div className={styles.uploadText}>
+            <p className={styles.uploadTitle}>Upload Payment Screenshot</p>
+            <p className={styles.uploadSubtitle}>JPG / PNG supported</p>
           </div>
         </div>
 
