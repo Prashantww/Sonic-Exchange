@@ -77,6 +77,26 @@ const CountrySelector = () => {
 
 // Sell Section Component
 const SellSection = () => {
+  const [isPaymentExpanded, setIsPaymentExpanded] = useState(false);
+  const [expandedPayment, setExpandedPayment] = useState(null);
+  const [selectedPaymentMethod, setSelectedPaymentMethod] =
+    useState("Payment Method");
+
+  const togglePaymentExpansion = () => {
+    setIsPaymentExpanded(!isPaymentExpanded);
+  };
+
+  const togglePaymentOption = (option) => {
+    setExpandedPayment(expandedPayment === option ? null : option);
+  };
+
+  const selectPaymentMethod = (method, displayName) => {
+    setSelectedPaymentMethod(displayName);
+    setExpandedPayment(method);
+  };
+
+  console.log(selectPaymentMethod);
+
   return (
     <div className={styles.tradingSection}>
       <div className={styles.sectionHeader}>
@@ -107,16 +127,160 @@ const SellSection = () => {
 
         <div className={styles.inputGroup}>
           <label className={styles.label}>Payment</label>
-          <div className={styles.selectWrapper}>
-            <input
-              type="text"
-              className={styles.input}
-              placeholder="Payment Method"
-              readOnly
-            />
-            <button className={styles.selectButton}>
-              <IoChevronDownOutline size={25} />
+          <div className={styles.paymentMethodContainer}>
+            <button
+              className={styles.paymentMethodButton}
+              onClick={togglePaymentExpansion}
+            >
+              <span>{selectedPaymentMethod}</span>
+              <IoChevronDownOutline
+                size={25}
+                style={{
+                  transform: isPaymentExpanded
+                    ? "rotate(180deg)"
+                    : "rotate(0deg)",
+                  transition: "transform 0.3s",
+                }}
+              />
             </button>
+
+            {isPaymentExpanded && (
+              <div className={styles.paymentDropdown}>
+                {/* UPI Option */}
+                <div
+                  className={`${styles.paymentOption} ${
+                    expandedPayment === "upi" ? styles.activeDropdown : ""
+                  }`}
+                >
+                  <button
+                    className={styles.paymentOptionHeader}
+                    onClick={() => selectPaymentMethod("upi", "UPI")}
+                  >
+                    <span>UPI</span>
+                    <IoChevronDownOutline
+                      size={20}
+                      style={{
+                        transform:
+                          expandedPayment === "upi"
+                            ? "rotate(180deg)"
+                            : "rotate(0deg)",
+                        transition: "transform 0.3s",
+                      }}
+                    />
+                  </button>
+                  {expandedPayment === "upi" && (
+                    <div className={styles.paymentOptionContent}>
+                      <label className={styles.paymentLabel}>
+                        Enter UPI ID
+                      </label>
+                      <input
+                        type="text"
+                        className={styles.paymentInput}
+                        placeholder="jhonsmith@oksbi"
+                      />
+                    </div>
+                  )}
+                </div>
+
+                {/* PayPal Option */}
+                <div
+                  className={`${styles.paymentOption} ${
+                    expandedPayment === "paypal" ? styles.activeDropdown : ""
+                  }`}
+                >
+                  <button
+                    className={styles.paymentOptionHeader}
+                    onClick={() => selectPaymentMethod("paypal", "PayPal")}
+                  >
+                    <span>PayPal</span>
+                    <IoChevronDownOutline
+                      size={20}
+                      style={{
+                        transform:
+                          expandedPayment === "paypal"
+                            ? "rotate(180deg)"
+                            : "rotate(0deg)",
+                        transition: "transform 0.3s",
+                      }}
+                    />
+                  </button>
+                  {expandedPayment === "paypal" && (
+                    <div className={styles.paymentOptionContent}>
+                      <label className={styles.paymentLabel}>
+                        Enter PayPal ID
+                      </label>
+                      <input
+                        type="text"
+                        className={styles.paymentInput}
+                        placeholder="your.email@example.com"
+                      />
+                    </div>
+                  )}
+                </div>
+
+                {/* Bank Transfer Option */}
+                <div
+                  className={`${styles.paymentOption} ${
+                    expandedPayment === "bank" ? styles.activeDropdown : ""
+                  }`}
+                >
+                  <button
+                    className={styles.paymentOptionHeader}
+                    onClick={() => selectPaymentMethod("bank", "Bank Transfer")}
+                  >
+                    <span>Bank Transfer</span>
+                    <IoChevronDownOutline
+                      size={20}
+                      style={{
+                        transform:
+                          expandedPayment === "bank"
+                            ? "rotate(180deg)"
+                            : "rotate(0deg)",
+                        transition: "transform 0.3s",
+                      }}
+                    />
+                  </button>
+                  {expandedPayment === "bank" && (
+                    <div className={styles.paymentOptionContent}>
+                      <label className={styles.paymentLabel}>
+                        Account Name
+                      </label>
+                      <input
+                        type="text"
+                        className={styles.paymentInput}
+                        placeholder="John Smith"
+                      />
+                      <label className={styles.paymentLabel}>Card Number</label>
+                      <input
+                        type="text"
+                        className={styles.paymentInput}
+                        placeholder="1234 5678 9012 3456"
+                      />
+                      <div className={styles.cardDetailsRow}>
+                        <div className={styles.cardDetailItem}>
+                          <label className={styles.paymentLabel}>
+                            Expire Date
+                          </label>
+                          <input
+                            type="text"
+                            className={styles.paymentInput}
+                            placeholder="MM/YY"
+                          />
+                        </div>
+                        <div className={styles.cardDetailItem}>
+                          <label className={styles.paymentLabel}>CVV</label>
+                          <input
+                            type="text"
+                            className={styles.paymentInput}
+                            placeholder="123"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
         </div>
 
@@ -161,19 +325,30 @@ const SellSection = () => {
 
 // Buy Section Component
 const BuySection = () => {
+  const [isPaymentExpanded, setIsPaymentExpanded] = useState(false);
+  const [expandedPayment, setExpandedPayment] = useState(null);
+  const [selectedPaymentMethod, setSelectedPaymentMethod] =
+    useState("Payment Method");
+
+  const togglePaymentExpansion = () => {
+    setIsPaymentExpanded(!isPaymentExpanded);
+  };
+
+  const togglePaymentOption = (option) => {
+    setExpandedPayment(expandedPayment === option ? null : option);
+  };
+
+  const selectPaymentMethod = (method, displayName) => {
+    setSelectedPaymentMethod(displayName);
+    setExpandedPayment(method);
+  };
+
   return (
     <div className={styles.tradingSection}>
       <div className={styles.sectionHeader}>
         <h2 className={styles.sectionTitle}>Buy USDT</h2>
         <button className={styles.closeButton}>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path
-              d="M18 6L6 18M6 6L18 18"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-          </svg>
+          <IoCloseSharp size={25} />
         </button>
       </div>
 
@@ -198,24 +373,148 @@ const BuySection = () => {
 
         <div className={styles.inputGroup}>
           <label className={styles.label}>Payment</label>
-          <div className={styles.selectWrapper}>
-            <input
-              type="text"
-              className={styles.input}
-              placeholder="Payment Method"
-              readOnly
-            />
-            <button className={styles.selectButton}>
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path
-                  d="M5 7.5L10 12.5L15 7.5"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+          <div className={styles.paymentMethodContainer}>
+            <button
+              className={styles.paymentMethodButton}
+              onClick={togglePaymentExpansion}
+            >
+              <span>{selectedPaymentMethod}</span>
+              <IoChevronDownOutline
+                size={25}
+                style={{
+                  transform: isPaymentExpanded
+                    ? "rotate(180deg)"
+                    : "rotate(0deg)",
+                  transition: "transform 0.3s",
+                }}
+              />
             </button>
+
+            {isPaymentExpanded && (
+              <div className={styles.paymentDropdown}>
+                {/* UPI Option */}
+                <div className={styles.paymentOption}>
+                  <button
+                    className={styles.paymentOptionHeader}
+                    onClick={() => selectPaymentMethod("upi", "UPI")}
+                  >
+                    <span>UPI</span>
+                    <IoChevronDownOutline
+                      size={20}
+                      style={{
+                        transform:
+                          expandedPayment === "upi"
+                            ? "rotate(180deg)"
+                            : "rotate(0deg)",
+                        transition: "transform 0.3s",
+                      }}
+                    />
+                  </button>
+                  {expandedPayment === "upi" && (
+                    <div className={styles.paymentOptionContent}>
+                      <label className={styles.paymentLabel}>
+                        Enter UPI ID
+                      </label>
+                      <input
+                        type="text"
+                        className={styles.paymentInput}
+                        placeholder="jhonsmith@oksbi"
+                      />
+                    </div>
+                  )}
+                </div>
+
+                {/* PayPal Option */}
+                <div className={styles.paymentOption}>
+                  <button
+                    className={styles.paymentOptionHeader}
+                    onClick={() => selectPaymentMethod("paypal", "PayPal")}
+                  >
+                    <span>PayPal</span>
+                    <IoChevronDownOutline
+                      size={20}
+                      style={{
+                        transform:
+                          expandedPayment === "paypal"
+                            ? "rotate(180deg)"
+                            : "rotate(0deg)",
+                        transition: "transform 0.3s",
+                      }}
+                    />
+                  </button>
+                  {expandedPayment === "paypal" && (
+                    <div className={styles.paymentOptionContent}>
+                      <label className={styles.paymentLabel}>
+                        Enter PayPal ID
+                      </label>
+                      <input
+                        type="text"
+                        className={styles.paymentInput}
+                        placeholder="your.email@example.com"
+                      />
+                    </div>
+                  )}
+                </div>
+
+                {/* Bank Transfer Option */}
+                <div className={styles.paymentOption}>
+                  <button
+                    className={styles.paymentOptionHeader}
+                    onClick={() => selectPaymentMethod("bank", "Bank Transfer")}
+                  >
+                    <span>Bank Transfer</span>
+                    <IoChevronDownOutline
+                      size={20}
+                      style={{
+                        transform:
+                          expandedPayment === "bank"
+                            ? "rotate(180deg)"
+                            : "rotate(0deg)",
+                        transition: "transform 0.3s",
+                      }}
+                    />
+                  </button>
+                  {expandedPayment === "bank" && (
+                    <div className={styles.paymentOptionContent}>
+                      <label className={styles.paymentLabel}>
+                        Account Name
+                      </label>
+                      <input
+                        type="text"
+                        className={styles.paymentInput}
+                        placeholder="John Smith"
+                      />
+                      <label className={styles.paymentLabel}>Card Number</label>
+                      <input
+                        type="text"
+                        className={styles.paymentInput}
+                        placeholder="1234 5678 9012 3456"
+                      />
+                      <div className={styles.cardDetailsRow}>
+                        <div className={styles.cardDetailItem}>
+                          <label className={styles.paymentLabel}>
+                            Expire Date
+                          </label>
+                          <input
+                            type="text"
+                            className={styles.paymentInput}
+                            placeholder="MM/YY"
+                          />
+                        </div>
+                        <div className={styles.cardDetailItem}>
+                          <label className={styles.paymentLabel}>CVV</label>
+                          <input
+                            type="text"
+                            className={styles.paymentInput}
+                            placeholder="123"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
         </div>
 
